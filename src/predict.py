@@ -25,7 +25,7 @@ def predict_from_df(
     model = load_model(model_path)
     # The pipeline's ColumnTransformer automatically selects your TOP_5_FEATURES
     preds = model.predict(df)
-    return pd.Series(np.ravel(preds), name="prediction")
+    return pd.Series(np.ravel(preds), name="target_pred")
 
 
 def main() -> None:
