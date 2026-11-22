@@ -1,0 +1,39 @@
+{
+    "train": {
+        "r2_mean": 0.90603,
+        "r2_std": 0.02385,
+        "rmse_mean": 1.56078,
+        "rmse_std": 0.1609
+    },
+    "val": {
+        "r2": 0.8969,
+        "rmse": 1.5214
+    },
+    "gap": {
+        "r2": 0.00913,
+        "rmse": 0.03938
+    },
+    "selected_terms_count": "20 / 55",
+    "selected_coefficients": {
+        "feature_13": 3.03381,
+        "feature_2": 2.681892,
+        "feature_9": 2.582589,
+        "feature_18^2": 1.750997,
+        "feature_11": 1.520144,
+        "feature_13^2": -1.182772,
+        "feature_13 feature_9^2": -1.084208,
+        "feature_13^2 feature_9": -0.991107,
+        "feature_9^2": -0.868547,
+        "feature_9^2 feature_18": 0.162728,
+        "feature_9 feature_18": 0.149936,
+        "feature_11^2 feature_18": 0.146973,
+        "feature_2 feature_11 feature_18": 0.134934,
+        "feature_2^2 feature_9": 0.123846,
+        "feature_9 feature_18^2": 0.113941,
+        "feature_2 feature_9": -0.108922,
+        "feature_2 feature_13 feature_9": 0.105839,
+        "feature_2^3": 0.0894,
+        "feature_13 feature_11 feature_18": -0.088219,
+        "feature_11^3": 0.018529
+    }
+}

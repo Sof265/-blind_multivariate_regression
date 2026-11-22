@@ -1,0 +1,18 @@
+# Virtual environments
+test_env/
+venv/
+.venv/
+
+# Python, build & pytest cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Challenge PDF & raw data (keep data/ uncommented if allowed to share)
+*.pdf
+
+# OS & editor files
+.DS_Store
+.vscode/
