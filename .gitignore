@@ -12,6 +12,8 @@ __pycache__/
 
 # Challenge PDF & raw data (keep data/ uncommented if allowed to share)
 *.pdf
+*.docx
+*.zip
 
 # OS & editor files
 .DS_Store
