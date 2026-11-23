@@ -21,10 +21,20 @@ def load_model(model_path: Path | str = config.MODEL_PATH):
 def predict_from_df(
     df: pd.DataFrame, model_path: Path | str = config.MODEL_PATH
 ) -> pd.Series:
-    """Generates predictions for a DataFrame using the saved pipeline."""
+    """Generates predictions for a DataFrame as a Series, raising an error on nulls."""
+    cols_to_check = getattr(config, "TOP_5_FEATURES", df.columns)
+    null_counts = df[cols_to_check].isnull().sum()
+    cols_with_nulls = null_counts[null_counts > 0].to_dict()
+
+    if cols_with_nulls:
+        raise ValueError(
+            f"Invalid data: input contains null values in {cols_with_nulls}. "
+            "Please provide complete data without nulls."
+        )
+
     model = load_model(model_path)
-    # The pipeline's ColumnTransformer automatically selects your TOP_5_FEATURES
     preds = model.predict(df)
+
     return pd.Series(np.ravel(preds), name="target_pred")
 
 
@@ -33,7 +43,11 @@ def main() -> None:
     full_path_test = os.path.join(config.DATASET_ROOT_PATH, config.TEST_FILENAME)
     df_test = pd.read_csv(full_path_test)
 
-    predictions = predict_from_df(df_test, model_path=config.MODEL_PATH)
+    try:
+        predictions = predict_from_df(df_test, model_path=config.MODEL_PATH)
+    except ValueError as e:
+        print(e)
+        return
 
     output_path = Path(config.TEST_PRED_PATH)
     output_path.parent.mkdir(parents=True, exist_ok=True)

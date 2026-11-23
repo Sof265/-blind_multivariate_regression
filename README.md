@@ -79,6 +79,8 @@ python -m src.predict
 
 ### Inference in Python (Quickstart)
 
+Use `predict_from_df()` to run model inference on a pandas `DataFrame`. Before predicting, the function automatically checks required feature columns for null values (`NaN`/`None`)—returning a `pd.Series` of predictions if the data is complete, or raising a `ValueError` with details on any missing values.
+
 ```python
 import pandas as pd
 from src import config
@@ -92,8 +94,11 @@ sample_df = pd.DataFrame([{
     "feature_18": -0.3,
 }])
 
-predictions = predict_from_df(sample_df, model_path=config.MODEL_PATH)
-print(f"Prediction: {predictions.iloc[0]:.4f}")
+try:
+    predictions = predict_from_df(sample_df, model_path=config.MODEL_PATH)
+    print(f"Prediction: {predictions.iloc[0]:.4f}")
+except ValueError as e:
+    print(e)
 ```
 
 ### Running Unit Tests
@@ -104,7 +109,8 @@ python -m pytest -v
 
 ## Limitations & What's Next
 
+- **No Missing-Value Imputation:** No imputation transformations were applied at this stage, as appropriate imputation strategies depend heavily on the domain context of each variable. Currently, inference halts and raises a `ValueError` when nulls are present.
 - **Small Sample Size & Extrapolation:** Trained on 800 samples; degree-3 polynomial terms can diverge sharply on out-of-distribution inputs outside the training feature range.
 - **Anonymized Features:** Feature definitions were anonymized, so domain-specific feature ratios (e.g., $x_a / x_b$) were intentionally excluded to avoid spurious correlations.
 - **Domain Error Tolerance:** Production readiness depends on the target application's acceptable error margin relative to the $\approx 1.52$ validation RMSE.
-- **Future Improvements:** Benchmark `ElasticNetCV` as a single-stage alternative to `LassoCV` + `RidgeCV`, modularize evaluation plots, and add staging validation before deployment.
+- **Future Improvements:** Once the domain context of each feature is better understood, implement context-aware imputation (e.g., mean, median, or constant value) within the preprocessing pipeline. Additionally, benchmark `ElasticNetCV` as a single-stage alternative to `LassoCV` + `RidgeCV`, modularize evaluation plots, and add staging validation before deployment.
