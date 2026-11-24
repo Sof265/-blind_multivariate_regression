@@ -6,7 +6,7 @@ A leak-free `scikit-learn` regression pipeline designed for small tabular datase
 
 ```text
 ├── data/               # Raw datasets (train and test CSVs)
-├── model/              # Saved model artifact (regressor.pkl), metrics, and predictions
+├── models/              # Saved model artifact (regressor.pkl), metrics, and predictions
 ├── notebooks/          # Exploratory analysis and model experimentation
 │   ├── EDA.py          # Exploratory data analysis (EDA) with feature selection diagnostics
 │   ├── Model.py        # Candidate model benchmarking and model evaluation
@@ -26,8 +26,8 @@ A leak-free `scikit-learn` regression pipeline designed for small tabular datase
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com
-   cd your-repo-name
+   git clone https://github.com/Sof265/-blind_multivariate_regression blind_multivariate_regression
+   cd blind_multivariate_regression
    ```
 
 2. **Create a virtual environment and install dependencies:**
